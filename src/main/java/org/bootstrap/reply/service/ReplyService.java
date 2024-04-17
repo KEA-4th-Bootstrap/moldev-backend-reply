@@ -2,6 +2,7 @@ package org.bootstrap.reply.service;
 
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
+import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.helper.ReplyHelper;
 import org.bootstrap.reply.mapper.ReplyMapper;
@@ -15,6 +16,10 @@ public class ReplyService {
 
     public void createReply(ReplyRequestDto requestDto) {
         Reply reply = createReplyAndSave(requestDto);
+    }
+
+    public void updateReply(String replyId, ReplyUpdateRequestDto replyUpdateRequestDto) {
+        replyHelper.updateReply(replyId, replyUpdateRequestDto);
     }
 
     private Reply createReplyAndSave(ReplyRequestDto requestDto) {
