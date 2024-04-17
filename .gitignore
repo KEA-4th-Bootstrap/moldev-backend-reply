@@ -35,6 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-팅
+
 ### Yml ###
 src/main/resources/application.yml

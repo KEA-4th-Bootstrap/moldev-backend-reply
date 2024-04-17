@@ -1,11 +1,16 @@
 package org.bootstrap.reply.helper;
 
 import lombok.RequiredArgsConstructor;
-import org.bootstrap.reply.repository.ReplyRepository;
+import org.bootstrap.reply.entity.Reply;
+import org.bootstrap.reply.mongorepository.ReplyMongoRepository;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class ReplyHelper {
-    private final ReplyRepository replyRepository;
+    private final ReplyMongoRepository replyMongoRepository;
+
+    public Reply saveReply(Reply reply) {
+        return replyMongoRepository.save(reply);
+    }
 }

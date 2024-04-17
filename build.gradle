@@ -24,6 +24,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
@@ -37,6 +38,9 @@ dependencies {
 
     // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // mongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     // querydsl
     implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
