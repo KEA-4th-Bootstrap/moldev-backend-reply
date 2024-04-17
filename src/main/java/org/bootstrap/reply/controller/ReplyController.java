@@ -20,10 +20,16 @@ public class ReplyController {
         return SuccessResponse.ok(null);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<SuccessResponse<?>> updateReply(@PathVariable("id") String replyId,
                                                           @RequestBody ReplyUpdateRequestDto requestDto) {
         replyService.updateReply(replyId, requestDto);
+        return SuccessResponse.ok(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SuccessResponse<?>> deleteReply(@PathVariable("id") String replyId) {
+        replyService.deleteReply(replyId);
         return SuccessResponse.ok(null);
     }
 }

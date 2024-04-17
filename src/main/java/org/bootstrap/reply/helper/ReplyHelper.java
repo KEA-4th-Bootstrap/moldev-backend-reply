@@ -15,6 +15,10 @@ public class ReplyHelper {
         replyMongoRepository.updateReplyById(replyId, replyUpdateRequestDto.content());
     }
 
+    public void deleteReply(String replyId) {
+        replyMongoRepository.deleteById(replyId);
+    }
+
     public Reply saveReply(Reply reply) {
         return replyMongoRepository.save(reply);
     }

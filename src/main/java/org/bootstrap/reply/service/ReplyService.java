@@ -22,6 +22,10 @@ public class ReplyService {
         replyHelper.updateReply(replyId, replyUpdateRequestDto);
     }
 
+    public void deleteReply(String replyId) {
+        replyHelper.deleteReply(replyId);
+    }
+
     private Reply createReplyAndSave(ReplyRequestDto requestDto) {
         Reply reply = replyMapper.toEntity(requestDto);
         return replyHelper.saveReply(reply);
