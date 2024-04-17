@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +16,10 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseTimeEntity {
     @CreatedDate
-    @Column(updatable = false)
+    @Field("created_at")
     private LocalDateTime createDate;
     @LastModifiedDate
+    @Field("updated_at")
     private LocalDateTime lastModifiedDate;
 }
 

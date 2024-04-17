@@ -2,6 +2,7 @@ package org.bootstrap.reply.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.bootstrap.reply.common.BaseTimeEntity;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -12,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Entity
 @Document(collection = "reply")
-public class Reply {
+public class Reply extends BaseTimeEntity {
     @Id
     @Field(name="_id")
     private String id;
