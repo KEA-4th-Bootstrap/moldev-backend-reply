@@ -1,12 +1,10 @@
-package org.bootstrap.reply.repository;
+package org.bootstrap.reply.mongorepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
-@Repository
-public class ReplyQueryRepositoryImpl implements ReplyQueryRepository{
+public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository {
     private final MongoTemplate mongoTemplate;
 
 }

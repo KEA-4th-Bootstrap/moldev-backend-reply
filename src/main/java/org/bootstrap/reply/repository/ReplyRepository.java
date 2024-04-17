@@ -1,7 +1,4 @@
 package org.bootstrap.reply.repository;
 
-import org.bootstrap.reply.entity.Reply;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-public interface ReplyRepository extends MongoRepository<Reply, String>, ReplyQueryRepository {
+public interface ReplyRepository {
 }

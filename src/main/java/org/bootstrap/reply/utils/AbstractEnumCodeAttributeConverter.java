@@ -4,7 +4,7 @@ import jakarta.persistence.AttributeConverter;
 import lombok.Getter;
 
 @Getter
-public class AbstractEnumCodeAttributeConverter<T extends Enum<T>> implements AttributeConverter<T, Integer> {
+public class AbstractEnumCodeAttributeConverter<T extends Enum<T> & EnumField> implements AttributeConverter<T, Integer> {
     private Class<T> targetEnumClass;
 
     public AbstractEnumCodeAttributeConverter(Class<T> targetEnumClass) {
@@ -21,4 +21,5 @@ public class AbstractEnumCodeAttributeConverter<T extends Enum<T>> implements At
         return EnumValueUtils.toEntityCode(targetEnumClass, dbData);
     }
 }
+
 
