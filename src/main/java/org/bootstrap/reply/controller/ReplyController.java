@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.common.SuccessResponse;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
-import org.bootstrap.reply.dto.response.ReplyListResponseDto;
+import org.bootstrap.reply.dto.response.CommentReplyListResponseDto;
 import org.bootstrap.reply.service.ReplyService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ public class ReplyController {
     @GetMapping("/{id}")
     public ResponseEntity<SuccessResponse<?>> getReplyList(@PathVariable("id") final Long postId,
                                                            @RequestParam(required = false) final String parentsId,
-                                                           @RequestParam(required = false) final Pageable pageable) {
-        final ReplyListResponseDto responseDto = replyService.getReplyList(postId, parentsId, pageable);
+                                                           final Pageable pageable) {
+        final CommentReplyListResponseDto responseDto = replyService.getReplyList(postId, parentsId, pageable);
         return SuccessResponse.ok(responseDto);
     }
 
