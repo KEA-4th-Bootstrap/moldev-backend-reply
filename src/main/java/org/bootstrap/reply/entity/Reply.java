@@ -31,7 +31,7 @@ public class Reply extends BaseTimeEntity {
                 .memberId(replyRequestDto.memberId())
                 .postId(replyRequestDto.postId())
                 .content(replyRequestDto.content())
-                .parentsId(replyRequestDto.replyId())
+                .parentsId(replyRequestDto.parentsId())
                 .build();
     }
 }
