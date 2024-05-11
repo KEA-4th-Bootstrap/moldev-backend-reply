@@ -3,7 +3,7 @@ package org.bootstrap.reply.service;
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
-import org.bootstrap.reply.dto.response.ReplyListResponseDto;
+import org.bootstrap.reply.dto.response.CommentReplyListResponseDto;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.helper.ReplyHelper;
 import org.bootstrap.reply.mapper.ReplyMapper;
@@ -17,9 +17,15 @@ public class ReplyService {
     private final ReplyHelper replyHelper;
     private final ReplyMapper replyMapper;
 
-    public ReplyListResponseDto getReplyList(Long postId, String parentsId, Pageable pageable) {
+    public CommentReplyListResponseDto getReplyList(Long postId, String parentsId, Pageable pageable) {
         Slice<Reply> replyList = replyHelper.findReplyList(postId, parentsId, pageable);
-        return replyMapper.toReplyListResponseDto(replyList);
+        if(isParentsIdNull(parentsId)) {
+            return replyMapper.toCommentListResponseDto(replyList);
+        }
+        else {
+
+            return replyMapper.toReplyListResponseDto(replyList);
+        }
     }
 
     public void createReply(ReplyRequestDto requestDto) {
@@ -37,5 +43,9 @@ public class ReplyService {
     private Reply createReplyAndSave(ReplyRequestDto requestDto) {
         Reply reply = replyMapper.toEntity(requestDto);
         return replyHelper.saveReply(reply);
+    }
+
+    private boolean isParentsIdNull(String parentsId){
+        return parentsId==null;
     }
 }

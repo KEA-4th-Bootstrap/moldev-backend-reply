@@ -26,7 +26,7 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
                 .limit(pageable.getPageSize() + 1);
         query.with(Sort.by(Sort.Order.asc("lastModifiedDate")));
         query.addCriteria(getCriteriaForCondition(postId, parentsId));
-        List<Reply> chats = mongoTemplate.find(query, Reply.class, "chatting");
+        List<Reply> chats = mongoTemplate.find(query, Reply.class, "reply");
         return new SliceImpl<>(chats, pageable, hasNextPage(chats, pageable.getPageSize()));
     }
 
@@ -42,9 +42,9 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
 
     private Criteria getCriteriaForCondition(Long postId, String parentsId) {
         if (Objects.isNull(parentsId))
-            return Criteria.where("postId").is(postId);
+            return Criteria.where("postId").is(postId).and("parentsId").isNull();
         else
-            return Criteria.where("postId").is(postId).and("parentsId").is(parentsId);
+            return Criteria.where("parentsId").is(parentsId);
     }
 
     private boolean hasNextPage(List<Reply> chats, int pageSize) {
