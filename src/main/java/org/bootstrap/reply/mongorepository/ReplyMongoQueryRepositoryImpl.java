@@ -19,15 +19,21 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public Slice<Reply> findReplyDetailVos(Long postId, String parentsId, Pageable pageable) {
-        Query query = new Query()
-                .with(pageable)
-                .skip(pageable.getPageSize() * pageable.getPageNumber())
-                .limit(pageable.getPageSize() + 1);
+    public List<Reply> findCommentDetailVos(Long postId) {
+        Query query = new Query();
         query.with(Sort.by(Sort.Order.asc("lastModifiedDate")));
-        query.addCriteria(getCriteriaForCondition(postId, parentsId));
-        List<Reply> chats = mongoTemplate.find(query, Reply.class, "reply");
-        return new SliceImpl<>(chats, pageable, hasNextPage(chats, pageable.getPageSize()));
+        query.addCriteria(Criteria.where("postId").is(postId).and("parentsId").isNull());
+        List<Reply> commentList = mongoTemplate.find(query, Reply.class, "reply");
+        return commentList;
+    }
+
+    @Override
+    public List<Reply> findReplyDetailVos(String parentsId) {
+        Query query = new Query();
+        query.with(Sort.by(Sort.Order.asc("lastModifiedDate")));
+        query.addCriteria(Criteria.where("parentsId").is(parentsId));
+        List<Reply> replyList = mongoTemplate.find(query, Reply.class, "reply");
+        return replyList;
     }
 
     @Override
@@ -38,13 +44,6 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
         query.addCriteria(Criteria.where("replyId").is(replyId));
         update.set("content", content);
         mongoTemplate.updateMulti(query, update, Reply.class);
-    }
-
-    private Criteria getCriteriaForCondition(Long postId, String parentsId) {
-        if (Objects.isNull(parentsId))
-            return Criteria.where("postId").is(postId).and("parentsId").isNull();
-        else
-            return Criteria.where("parentsId").is(parentsId);
     }
 
     private boolean hasNextPage(List<Reply> chats, int pageSize) {

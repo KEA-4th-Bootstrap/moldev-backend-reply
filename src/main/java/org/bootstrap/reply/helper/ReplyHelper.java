@@ -9,13 +9,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
 public class ReplyHelper {
     private final ReplyMongoRepository replyMongoRepository;
 
-    public Slice<Reply> findReplyList (Long postId, String parentsId, Pageable pageable) {
-        return replyMongoRepository.findReplyDetailVos(postId, parentsId, pageable);
+    public List<Reply> findCommentList (Long postId) {
+        return replyMongoRepository.findCommentDetailVos(postId);
+    }
+
+    public List<Reply> findReplyList (String parentsId) {
+        return replyMongoRepository.findReplyDetailVos(parentsId);
     }
 
     public void updateReply(String replyId, ReplyUpdateRequestDto replyUpdateRequestDto) {

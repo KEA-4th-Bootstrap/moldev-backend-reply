@@ -4,8 +4,12 @@ import org.bootstrap.reply.entity.Reply;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
+import java.util.List;
+
 public interface ReplyMongoQueryRepository {
-    Slice<Reply> findReplyDetailVos(Long postId, String parentsId, Pageable pageable);
+    List<Reply> findCommentDetailVos(Long postId);
+
+    List<Reply> findReplyDetailVos(String parentsId);
 
     void updateReplyById(String replyId, String content);
 }
