@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.common.SuccessResponse;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
-import org.bootstrap.reply.dto.response.CommentReplyListResponseDto;
+import org.bootstrap.reply.dto.response.CommentListResponseDto;
+import org.bootstrap.reply.dto.response.ReplyListResponseDto;
 import org.bootstrap.reply.service.ReplyService;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +17,14 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessResponse<?>> getReplyList(@PathVariable("id") final Long postId,
-                                                           @RequestParam(required = false) final String parentsId,
-                                                           final Pageable pageable) {
-        final CommentReplyListResponseDto responseDto = replyService.getReplyList(postId, parentsId, pageable);
+    public ResponseEntity<SuccessResponse<?>> getCommentList(@PathVariable("id") final Long postId) {
+        final CommentListResponseDto responseDto = replyService.getCommentList(postId);
+        return SuccessResponse.ok(responseDto);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<SuccessResponse<?>> getReplyList(@RequestParam final String parentsId) {
+        final ReplyListResponseDto responseDto = replyService.getReplyList(parentsId);
         return SuccessResponse.ok(responseDto);
     }
 
