@@ -2,14 +2,13 @@ package org.bootstrap.reply.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
+import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.mongorepository.ReplyMongoRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -34,5 +33,16 @@ public class ReplyHelper {
 
     public Reply saveReply(Reply reply) {
         return replyMongoRepository.save(reply);
+    }
+
+    public Long countPostComment(Long postId) {
+        return replyMongoRepository.countByPostIdAndParentsIdIsNull(postId);
+    }
+
+    public List<CommentReplyCountVo> countCommentReply(List<Reply> commentList) {
+        return replyMongoRepository.countAllByParentsId(
+                commentList.stream()
+                .map(Reply::getId)
+                .collect(Collectors.toList()));
     }
 }

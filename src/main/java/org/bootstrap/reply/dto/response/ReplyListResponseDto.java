@@ -9,15 +9,13 @@ import java.util.stream.Collectors;
 
 @Builder(access = AccessLevel.PRIVATE)
 public record ReplyListResponseDto(
-        List<ReplyResponseDto> replyList,
-        Integer totalCount
+        List<ReplyResponseDto> replyList
 ) {
     public static ReplyListResponseDto of(List<Reply> replyList) {
         return ReplyListResponseDto.builder()
                 .replyList(replyList.stream()
                         .map(ReplyResponseDto::of)
                         .collect(Collectors.toList()))
-                .totalCount(replyList.size())
                 .build();
     }
 }
