@@ -6,6 +6,7 @@ import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
 import org.bootstrap.reply.dto.response.CommentCountResponseDto;
 import org.bootstrap.reply.dto.response.CommentListResponseDto;
+import org.bootstrap.reply.dto.response.DefaultSuccessResponseDto;
 import org.bootstrap.reply.dto.response.ReplyListResponseDto;
 import org.bootstrap.reply.service.ReplyService;
 import org.springframework.http.HttpStatus;
@@ -40,18 +41,21 @@ public class ReplyController {
     }
 
     @PostMapping
-    public void createReply(@RequestBody final ReplyRequestDto requestDto) {
+    public ResponseEntity<DefaultSuccessResponseDto> createReply(@RequestBody final ReplyRequestDto requestDto) {
         replyService.createReply(requestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 
     @PatchMapping("/{id}")
-    public void updateReply(@PathVariable("id") final String replyId,
+    public ResponseEntity<DefaultSuccessResponseDto> updateReply(@PathVariable("id") final String replyId,
                             @RequestBody final ReplyUpdateRequestDto requestDto) {
         replyService.updateReply(replyId, requestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteReply(@PathVariable("id") final String replyId) {
+    public ResponseEntity<DefaultSuccessResponseDto> deleteReply(@PathVariable("id") final String replyId) {
         replyService.deleteReply(replyId);
+        return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 }
