@@ -22,7 +22,7 @@ public class KafkaProducerConfig {
     public ProducerFactory<String, UpdateMessageDto> factory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.16.214.36:31719");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092");
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
         return new DefaultKafkaProducerFactory<>(props);
