@@ -40,21 +40,18 @@ public class ReplyController {
     }
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<?>> createReply(@RequestBody final ReplyRequestDto requestDto) {
+    public void createReply(@RequestBody final ReplyRequestDto requestDto) {
         replyService.createReply(requestDto);
-        return SuccessResponse.created(null);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<SuccessResponse<?>> updateReply(@PathVariable("id") final String replyId,
-                                                          @RequestBody final ReplyUpdateRequestDto requestDto) {
+    public void updateReply(@PathVariable("id") final String replyId,
+                            @RequestBody final ReplyUpdateRequestDto requestDto) {
         replyService.updateReply(replyId, requestDto);
-        return SuccessResponse.ok(null);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<SuccessResponse<?>> deleteReply(@PathVariable("id") final String replyId) {
+    public void deleteReply(@PathVariable("id") final String replyId) {
         replyService.deleteReply(replyId);
-        return SuccessResponse.ok(null);
     }
 }
