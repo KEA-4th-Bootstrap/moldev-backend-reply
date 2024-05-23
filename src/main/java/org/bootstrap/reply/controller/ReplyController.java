@@ -41,21 +41,23 @@ public class ReplyController {
     }
 
     @PostMapping
-    public ResponseEntity<DefaultSuccessResponseDto> createReply(@RequestBody final ReplyRequestDto requestDto) {
-        replyService.createReply(requestDto);
+    public ResponseEntity<DefaultSuccessResponseDto> createReply(@RequestHeader("Authorization") final Long memberId,
+                                                                 @RequestBody final ReplyRequestDto requestDto) {
+        replyService.createReply(memberId, requestDto);
         return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<DefaultSuccessResponseDto> updateReply(@PathVariable("id") final String replyId,
-                            @RequestBody final ReplyUpdateRequestDto requestDto) {
-        replyService.updateReply(replyId, requestDto);
+    @PatchMapping("")
+    public ResponseEntity<DefaultSuccessResponseDto> updateReply(@RequestHeader("Authorization") final Long memberId,
+                                                                 @RequestBody final ReplyUpdateRequestDto requestDto) {
+        replyService.updateReply(memberId, requestDto);
         return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DefaultSuccessResponseDto> deleteReply(@PathVariable("id") final String replyId) {
-        replyService.deleteReply(replyId);
+    public ResponseEntity<DefaultSuccessResponseDto> deleteReply(@RequestHeader("Authorization") final Long memberId,
+                                                                 @PathVariable("id") final String replyId) {
+        replyService.deleteReply(memberId, replyId);
         return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 }

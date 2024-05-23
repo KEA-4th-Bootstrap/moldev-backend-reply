@@ -11,8 +11,8 @@ import java.util.List;
 
 @Component
 public class ReplyMapper {
-    public Reply toEntity(ReplyRequestDto replyRequestDto) {
-        return Reply.createReply(replyRequestDto);
+    public Reply toEntity(Long memberId, ReplyRequestDto replyRequestDto) {
+        return Reply.createReply(memberId, replyRequestDto);
     }
 
     public ReplyListResponseDto toReplyListResponseDto(List<Reply> replyList) {
