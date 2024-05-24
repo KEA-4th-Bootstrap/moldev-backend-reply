@@ -26,9 +26,9 @@ public class Reply extends BaseTimeEntity {
     @Field(name="parents_id")
     private String parentsId;
 
-    public static Reply createReply(ReplyRequestDto replyRequestDto) {
+    public static Reply createReply(Long memberId, ReplyRequestDto replyRequestDto) {
         return Reply.builder()
-                .memberId(replyRequestDto.memberId())
+                .memberId(memberId)
                 .postId(replyRequestDto.postId())
                 .content(replyRequestDto.content())
                 .parentsId(replyRequestDto.parentsId())

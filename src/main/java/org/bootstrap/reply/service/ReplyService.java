@@ -36,20 +36,22 @@ public class ReplyService {
         return CommentCountResponseDto.of(commentCount);
     }
 
-    public void createReply(ReplyRequestDto requestDto) {
-        Reply reply = createReplyAndSave(requestDto);
+    public void createReply(Long memberId, ReplyRequestDto requestDto) {
+        Reply reply = createReplyAndSave(memberId, requestDto);
     }
 
-    public void updateReply(String replyId, ReplyUpdateRequestDto replyUpdateRequestDto) {
-        replyHelper.updateReply(replyId, replyUpdateRequestDto);
+    public void updateReply(Long memberId, ReplyUpdateRequestDto replyUpdateRequestDto) {
+        replyHelper.checkReplyWriter(memberId, replyUpdateRequestDto.replyId());
+        replyHelper.updateReply(replyUpdateRequestDto.replyId(), replyUpdateRequestDto.content());
     }
 
-    public void deleteReply(String replyId) {
+    public void deleteReply(Long memberId, String replyId) {
+        replyHelper.checkReplyWriter(memberId, replyId);
         replyHelper.deleteReply(replyId);
     }
 
-    private Reply createReplyAndSave(ReplyRequestDto requestDto) {
-        Reply reply = replyMapper.toEntity(requestDto);
+    private Reply createReplyAndSave(Long memberId, ReplyRequestDto requestDto) {
+        Reply reply = replyMapper.toEntity(memberId, requestDto);
         return replyHelper.saveReply(reply);
     }
 

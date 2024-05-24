@@ -1,6 +1,7 @@
 package org.bootstrap.reply.helper;
 
 import lombok.RequiredArgsConstructor;
+import org.bootstrap.reply.common.error.ForbiddenException;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
 import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
@@ -26,8 +27,14 @@ public class ReplyHelper {
         return replyMongoRepository.findReplyDetailVos(parentsId);
     }
 
-    public void updateReply(String replyId, ReplyUpdateRequestDto replyUpdateRequestDto) {
-        replyMongoRepository.updateReplyById(replyId, replyUpdateRequestDto.content());
+    public void checkReplyWriter(Long memberId, String replyId) {
+        if(!replyMongoRepository.existsByIdAndMemberId(replyId, memberId)) {
+            throw ForbiddenException.EXCEPTION;
+        }
+    }
+
+    public void updateReply(String replyId, String content) {
+        replyMongoRepository.updateReplyById(replyId, content);
     }
 
     public void deleteReply(String replyId) {
