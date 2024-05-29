@@ -9,9 +9,9 @@ public record UpdateMessageDto(
         Long memberId,
         Long postId
 ) {
-    public static UpdateMessageDto of(Reply reply) {
+    public static UpdateMessageDto of(Reply reply, Long memberId) {
         return UpdateMessageDto.builder()
-                .memberId(reply.getMemberId())
+                .memberId(memberId)
                 .postId(reply.getPostId())
                 .build();
     }

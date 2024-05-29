@@ -41,9 +41,9 @@ public class ReplyHelper {
         replyMongoRepository.deleteById(replyId);
     }
 
-    public Reply saveReply(Reply reply) {
+    public Reply saveReply(Reply reply, Long memberId) {
         Reply savedReply = replyMongoRepository.save(reply);
-        kafkaProducer.send("update", UpdateMessageDto.of(savedReply));
+        kafkaProducer.send("update", UpdateMessageDto.of(savedReply, memberId));
         return savedReply;
     }
 

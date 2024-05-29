@@ -52,7 +52,7 @@ public class ReplyService {
 
     private Reply createReplyAndSave(Long memberId, ReplyRequestDto requestDto) {
         Reply reply = replyMapper.toEntity(memberId, requestDto);
-        return replyHelper.saveReply(reply);
+        return replyHelper.saveReply(reply, memberId);
     }
 
     private boolean isParentsIdNull(String parentsId){
