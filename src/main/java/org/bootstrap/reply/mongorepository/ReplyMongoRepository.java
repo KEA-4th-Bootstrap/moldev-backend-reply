@@ -3,8 +3,6 @@ package org.bootstrap.reply.mongorepository;
 import org.bootstrap.reply.entity.Reply;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Optional;
-
 public interface ReplyMongoRepository extends MongoRepository<Reply, String>, ReplyMongoQueryRepository {
 
     Long countByPostIdAndParentsIdIsNull(Long postId);

@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "reply")
 public class Reply extends BaseTimeEntity {
     @Id
-    @Field(name="_id")
+//    @Field(name="_id")
     private String id;
     @Field(name="member_id")
     private Long memberId;

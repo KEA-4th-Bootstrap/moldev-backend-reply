@@ -47,7 +47,7 @@ public class ReplyController {
         return ResponseEntity.status(HttpStatus.OK).body(DefaultSuccessResponseDto.ok());
     }
 
-    @PatchMapping("")
+    @PatchMapping
     public ResponseEntity<DefaultSuccessResponseDto> updateReply(@RequestHeader("Authorization") final Long memberId,
                                                                  @RequestBody final ReplyUpdateRequestDto requestDto) {
         replyService.updateReply(memberId, requestDto);

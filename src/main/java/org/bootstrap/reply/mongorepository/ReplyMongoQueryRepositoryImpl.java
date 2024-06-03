@@ -59,7 +59,6 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
     }
 
 
-
     private boolean hasNextPage(List<Reply> chats, int pageSize) {
         if (chats.size() > pageSize) {
             chats.remove(pageSize);
