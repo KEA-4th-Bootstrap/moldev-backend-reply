@@ -49,6 +49,13 @@ public class ReplyMongoQueryRepositoryImpl implements ReplyMongoQueryRepository 
     }
 
     @Override
+    public Reply findPostIdByReplyId(String replyId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(replyId));
+        return mongoTemplate.findOne(query, Reply.class, "reply");
+    }
+
+    @Override
     public void updateReplyById(String replyId, String content) {
         Query query = new Query();
         Update update = new Update();

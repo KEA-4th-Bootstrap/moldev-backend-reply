@@ -1,14 +1,13 @@
 package org.bootstrap.reply.helper;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.common.error.ForbiddenException;
+import org.bootstrap.reply.dto.response.ReplyPostIdResponseDto;
 import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.kafka.KafkaProducer;
 import org.bootstrap.reply.kafka.UpdateMessageDto;
 import org.bootstrap.reply.mongorepository.ReplyMongoRepository;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -57,5 +56,10 @@ public class ReplyHelper {
                 commentList.stream()
                         .map(Reply::getId)
                         .collect(Collectors.toList()));
+    }
+
+    public ReplyPostIdResponseDto getReplyPostId(String replyId) {
+        Reply reply = replyMongoRepository.findPostIdByReplyId(replyId);
+        return ReplyPostIdResponseDto.of(reply);
     }
 }

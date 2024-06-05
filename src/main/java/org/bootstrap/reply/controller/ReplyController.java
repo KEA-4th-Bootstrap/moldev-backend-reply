@@ -1,13 +1,9 @@
 package org.bootstrap.reply.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.bootstrap.reply.common.SuccessResponse;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
-import org.bootstrap.reply.dto.response.CommentCountResponseDto;
-import org.bootstrap.reply.dto.response.CommentListResponseDto;
-import org.bootstrap.reply.dto.response.DefaultSuccessResponseDto;
-import org.bootstrap.reply.dto.response.ReplyListResponseDto;
+import org.bootstrap.reply.dto.response.*;
 import org.bootstrap.reply.service.ReplyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +33,13 @@ public class ReplyController {
     @GetMapping("/count/{id}")
     public ResponseEntity<CommentCountResponseDto> getPostCommentCount(@PathVariable("id") final Long postId) {
         final CommentCountResponseDto responseDto = replyService.getPostCommentCount(postId);
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
+    // 댓글이 달린 postId 가져오기
+    @GetMapping("/post-id")
+    public ResponseEntity<ReplyPostIdResponseDto> getReplyPostId(@RequestParam final String replyId) {
+        final ReplyPostIdResponseDto responseDto = replyService.getReplyPostId(replyId);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 

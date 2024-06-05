@@ -12,5 +12,7 @@ public interface ReplyMongoQueryRepository {
 
     List<CommentReplyCountVo> countAllByParentsId(List<String> parentsIdList);
 
+    Reply findPostIdByReplyId(String replyId);
+
     void updateReplyById(String replyId, String content);
 }

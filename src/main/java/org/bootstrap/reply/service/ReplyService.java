@@ -6,6 +6,7 @@ import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
 import org.bootstrap.reply.dto.response.CommentCountResponseDto;
 import org.bootstrap.reply.dto.response.CommentListResponseDto;
 import org.bootstrap.reply.dto.response.ReplyListResponseDto;
+import org.bootstrap.reply.dto.response.ReplyPostIdResponseDto;
 import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.helper.ReplyHelper;
@@ -34,6 +35,10 @@ public class ReplyService {
     public CommentCountResponseDto getPostCommentCount(Long postId) {
         Long commentCount = replyHelper.countPostComment(postId);
         return CommentCountResponseDto.of(commentCount);
+    }
+
+    public ReplyPostIdResponseDto getReplyPostId(String replyId) {
+        return replyHelper.getReplyPostId(replyId);
     }
 
     public void createReply(Long memberId, ReplyRequestDto requestDto) {
