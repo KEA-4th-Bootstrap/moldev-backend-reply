@@ -3,10 +3,7 @@ package org.bootstrap.reply.service;
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.dto.request.ReplyRequestDto;
 import org.bootstrap.reply.dto.request.ReplyUpdateRequestDto;
-import org.bootstrap.reply.dto.response.CommentCountResponseDto;
-import org.bootstrap.reply.dto.response.CommentListResponseDto;
-import org.bootstrap.reply.dto.response.ReplyListResponseDto;
-import org.bootstrap.reply.dto.response.ReplyPostIdResponseDto;
+import org.bootstrap.reply.dto.response.*;
 import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.helper.ReplyHelper;
@@ -39,6 +36,10 @@ public class ReplyService {
 
     public ReplyPostIdResponseDto getReplyPostId(String replyId) {
         return replyHelper.getReplyPostId(replyId);
+    }
+
+    public ReplyResponseDto getReply(String replyId) {
+        return replyHelper.getReply(replyId);
     }
 
     public void createReply(Long memberId, ReplyRequestDto requestDto) {

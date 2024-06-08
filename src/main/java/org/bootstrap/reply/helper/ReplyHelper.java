@@ -3,6 +3,7 @@ package org.bootstrap.reply.helper;
 import lombok.RequiredArgsConstructor;
 import org.bootstrap.reply.common.error.ForbiddenException;
 import org.bootstrap.reply.dto.response.ReplyPostIdResponseDto;
+import org.bootstrap.reply.dto.response.ReplyResponseDto;
 import org.bootstrap.reply.dto.vo.CommentReplyCountVo;
 import org.bootstrap.reply.entity.Reply;
 import org.bootstrap.reply.kafka.KafkaProducer;
@@ -61,5 +62,10 @@ public class ReplyHelper {
     public ReplyPostIdResponseDto getReplyPostId(String replyId) {
         Reply reply = replyMongoRepository.findPostIdByReplyId(replyId);
         return ReplyPostIdResponseDto.of(reply);
+    }
+
+    public ReplyResponseDto getReply(String replyId) {
+        Reply reply = replyMongoRepository.findPostIdByReplyId(replyId);
+        return ReplyResponseDto.of(reply);
     }
 }
