@@ -37,8 +37,8 @@ public class ReplyController {
     }
 
     // 댓글이 달린 postId 가져오기
-    @GetMapping("/post-id")
-    public ResponseEntity<ReplyResponseDto> getReply(@RequestParam final String replyId) {
+    @GetMapping("/report/{replyId}")
+    public ResponseEntity<ReplyResponseDto> getReply(@PathVariable final String replyId) {
         final ReplyResponseDto responseDto = replyService.getReply(replyId);
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
